@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EgitimSistemi.EntityLayer.Concreate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EgitimSistemi.BusinessLayer.Abstract
 {
-    internal interface IDerslerService
+    internal interface IDerslerService:IGenericService<Dersler>
     {
     }
 }
