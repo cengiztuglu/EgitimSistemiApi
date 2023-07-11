@@ -29,6 +29,8 @@ namespace EgitimSistemi.WebApi.Controllers
 
             return Ok();
         }
+
+
         [HttpDelete]
         public ActionResult OgrenciDelete(Ogrenci ogrenci)
         {

@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using EgitimSistemi.BusinessLayer.Abstract;
 using EgitimSistemi.BusinessLayer.Concrete;
 using EgitimSistemi.DataAccessLayer.Abstract;
@@ -10,9 +14,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddScoped<IOgrenciDal, EfOgrenciDal>();
 builder.Services.AddScoped<IOgrenciService, OgrenciMenager>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("EgitimApiCors", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -20,12 +32,22 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YourProject v1"));
 }
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("EgitimApiCors");
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();
