@@ -7,6 +7,8 @@ using EgitimSistemi.BusinessLayer.Concrete;
 using EgitimSistemi.DataAccessLayer.Abstract;
 using EgitimSistemi.DataAccessLayer.Concrete;
 using EgitimSistemi.DataAccessLayer.EntityFramework;
+using YourProject.Business;
+using EgitimSistemi.DataAccessLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddScoped<IOgrenciDal, EfOgrenciDal>();
 builder.Services.AddScoped<IOgrenciService, OgrenciMenager>();
+builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<OgrenciRepository>();
+
 
 builder.Services.AddCors(options =>
 {
