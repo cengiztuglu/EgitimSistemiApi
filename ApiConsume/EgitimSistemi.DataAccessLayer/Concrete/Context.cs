@@ -13,7 +13,7 @@ namespace EgitimSistemi.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-HNL7PLQ;initial catalog=EgitimSistemiApiDb; integrated security=true; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-HNL7PLQ;initial catalog=EgitimSistemiDb; integrated security=true; TrustServerCertificate=True;");
 
         }
         public DbSet<Ogrenci> Ogrencis { get; set; }

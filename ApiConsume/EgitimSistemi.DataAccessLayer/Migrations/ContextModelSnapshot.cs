@@ -38,6 +38,10 @@ namespace EgitimSistemi.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Sifre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

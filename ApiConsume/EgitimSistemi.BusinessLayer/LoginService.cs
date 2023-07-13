@@ -10,14 +10,14 @@ using EgitimSistemi.EntityLayer.Concreate;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace YourProject.Business
+namespace EgitimSistemi.BusinessLayer
 {
     public class LoginService
     {
-        private readonly  OgrenciRepository _ogrenciRepository;
+        private readonly OgrenciLoginRepository _ogrenciRepository;
         private readonly IConfiguration _configuration;
 
-        public LoginService(OgrenciRepository ogrenciRepository, IConfiguration configuration)
+        public LoginService(OgrenciLoginRepository ogrenciRepository, IConfiguration configuration)
         {
             _ogrenciRepository = ogrenciRepository;
             _configuration = configuration;

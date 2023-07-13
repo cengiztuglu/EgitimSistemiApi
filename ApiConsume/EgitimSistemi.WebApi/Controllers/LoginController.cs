@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EgitimSistemi.BusinessLayer;
-using YourProject.Business;
 using EgitimSistemi.EntityLayer.Concreate;
 
 namespace EgitimSistemi.WebApi.Controllers

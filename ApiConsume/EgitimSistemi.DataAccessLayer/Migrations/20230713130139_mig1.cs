@@ -20,6 +20,7 @@ namespace EgitimSistemi.DataAccessLayer.Migrations
                     Ad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoyAd = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Adres = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TelNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Yetki = table.Column<bool>(type: "bit", nullable: false),

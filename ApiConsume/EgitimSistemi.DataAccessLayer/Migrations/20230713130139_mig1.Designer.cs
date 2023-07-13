@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgitimSistemi.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230710104028_mig1")]
+    [Migration("20230713130139_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -38,6 +38,10 @@ namespace EgitimSistemi.DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Adres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

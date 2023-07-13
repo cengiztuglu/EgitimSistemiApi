@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EgitimSistemi.DataAccessLayer.Repositories
 {
-    public class OgrenciRepository
+    public class OgrenciLoginRepository
     {
         private readonly Context _context;
 
-        public OgrenciRepository(Context context)
+        public OgrenciLoginRepository(Context context)
         {
             _context = context;
         }
