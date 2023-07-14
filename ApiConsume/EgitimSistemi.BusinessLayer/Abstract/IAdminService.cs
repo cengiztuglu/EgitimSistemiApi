@@ -9,6 +9,7 @@ namespace EgitimSistemi.BusinessLayer.Abstract
 {
     public interface IAdminService:IGenericService<Admin>
     {
+
         
     }
 }

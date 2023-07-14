@@ -18,13 +18,13 @@ namespace EgitimSistemi.WebApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(Admin admin)
+        public async Task<IActionResult> Login([FromBody] Admin admin)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid login request");
 
-            var userType = admin.Yetki == true ? "SuperAdmin" : "RegularAdmin";
-            var token = await _adminLoginService.LoginAsync(admin.Mail, admin.Sifre, userType);
+            var userType = admin.Yetki ? "SuperAdmin" : "RegularAdmin";
+            var token = await _adminLoginService.LoginAsync(admin.Mail, admin.Sifre);
             if (token == null)
                 return Unauthorized("Invalid login credentials");
 

@@ -18,10 +18,15 @@ namespace EgitimSistemi.DataAccessLayer.Repositories
             _context = context;
         }
 
-      
-        public async Task<Admin> GetOgrenciByEmailAndPassword(string email, string sifre)
-       {
-            return await _context.Admins.FirstOrDefaultAsync(o => o.Mail == email && o.Sifre == sifre);
-       }
+
+        public async Task<Admin> GetSuperAdminByEmailAndPassword(string email, string password)
+        {
+            return await _context.Admins.FirstOrDefaultAsync(o => o.Mail == email && o.Sifre == password && o.Yetki);
+        }
+
+        public async Task<Admin> GetRegularAdminByEmailAndPassword(string email, string password)
+        {
+            return await _context.Admins.FirstOrDefaultAsync(o => o.Mail == email && o.Sifre == password && !o.Yetki);
+        }
     }
 }

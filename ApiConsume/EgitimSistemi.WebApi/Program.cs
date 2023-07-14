@@ -16,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddScoped<IOgrenciDal, EfOgrenciDal>();
 builder.Services.AddScoped<IOgrenciService, OgrenciMenager>();
+builder.Services.AddScoped<IAdminDal, EfAdminDal>();
+builder.Services.AddScoped<IAdminService, AdminMenager>();
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<AdminLoginService>();
 builder.Services.AddScoped<OgrenciLoginRepository>();

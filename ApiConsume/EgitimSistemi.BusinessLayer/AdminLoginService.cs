@@ -1,11 +1,12 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using EgitimSistemi.DataAccessLayer.Repositories;
+﻿using EgitimSistemi.DataAccessLayer.Repositories;
 using EgitimSistemi.EntityLayer.Concreate;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EgitimSistemi.BusinessLayer
 {
@@ -20,19 +21,35 @@ namespace EgitimSistemi.BusinessLayer
             _configuration = configuration;
         }
 
-        public async Task<string> LoginAsync(string email, string password, string userType)
+        public async Task<string> LoginAsync(string email, string password)
         {
-            var admin = await _adminLoginRepository.GetOgrenciByEmailAndPassword(email, password);
-            if (admin == null)
-                return null;
+            // Süper admini kontrol et
+            var superAdmin = await _adminLoginRepository.GetSuperAdminByEmailAndPassword(email, password);
+            if (superAdmin != null)
+            {
+                var token = GenerateJwtToken(superAdmin, "SuperAdmin");
+                return token;
+            }
 
-            var token = GenerateJwtToken(admin, userType);
-            return token;
+            // Düzenli admini kontrol et
+            var regularAdmin = await _adminLoginRepository.GetRegularAdminByEmailAndPassword(email, password);
+            if (regularAdmin != null)
+            {
+                var token = GenerateJwtToken(regularAdmin, "RegularAdmin");
+                return token;
+            }
+
+            return null; // Giriş başarısız
         }
 
         private string GenerateJwtToken(Admin admin, string userType)
         {
-            var jwtSettings = _configuration.GetSection($"Jwt:{userType}");
+            var jwtSettings = _configuration.GetSection($"JwtSettings:{userType}");
+
+            if (string.IsNullOrEmpty(jwtSettings["Key"]))
+            {
+                throw new Exception("JWT key is null or empty.");
+            }
 
             var claims = new[]
             {
