@@ -41,6 +41,7 @@ namespace EgitimSistemi.BusinessLayer
 
             return null; // Giriş başarısız
         }
+       
 
         private string GenerateJwtToken(Admin admin, string userType)
         {
