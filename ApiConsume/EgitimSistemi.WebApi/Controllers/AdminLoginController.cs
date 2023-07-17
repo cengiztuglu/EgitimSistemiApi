@@ -1,6 +1,7 @@
 ﻿using EgitimSistemi.BusinessLayer;
 using EgitimSistemi.DataAccessLayer.Repositories;
 using EgitimSistemi.EntityLayer.Concreate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace EgitimSistemi.WebApi.Controllers
         }
 
         [HttpGet("ogrenciler")]
+        [Authorize]
         public async Task<IActionResult> ListeleOgrenciler()
         {
             var ogrenciler = await _adminLoginRepository.ListeleOgrenciler();
